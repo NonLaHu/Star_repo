@@ -2,13 +2,13 @@
 # Stage 1 — Build
 # ============================================
 
-FROM node:22-alpine AS builder
+FROM node:22 AS builder
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm ci
+RUN npm i
 
 COPY . .
 
