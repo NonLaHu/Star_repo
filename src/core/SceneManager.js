@@ -41,8 +41,29 @@ export class SceneManager {
     this.scene.remove(object);
   }
 
-  start() {
-    this.animate();
+  start(onUpdate) {
+    const clock =
+      new THREE.Clock();
+
+    const animate = () => {
+      requestAnimationFrame(
+        animate
+      );
+
+      const time =
+        clock.getElapsedTime();
+
+      onUpdate?.(time);
+
+      this.controls.update();
+
+      this.renderer.object.render(
+        this.scene,
+        this.camera.object
+      );
+    };
+
+    animate();
   }
 
   animate() {

@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { Star } from "./Star.js";
 import { Constellation } from "./Constellation.js";
 import { createGalaxyMapper } from "./galaxyMapper.js";
+import { StarField } from "./StarField.js";
 
 export class Galaxy {
   constructor(scene) {
@@ -13,6 +14,16 @@ export class Galaxy {
 
     this.scene.add(
       this.object
+    );
+
+    this.starField =
+      new StarField({
+        count: 1800,
+        radius: 1800
+      });
+
+    this.scene.add(
+      this.starField.object
     );
 
     this.stars = [];
@@ -36,6 +47,10 @@ export class Galaxy {
       commits,
       mapper
     );
+  }
+
+  update(time) {
+    this.starField.update(time);
   }
 
   createStars(
